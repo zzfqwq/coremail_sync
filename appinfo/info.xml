@@ -8,6 +8,14 @@
     <version>0.1.0</version>
     <licence>AGPL-3.0-or-later</licence>
     <author>Coremail</author>
+    <website>https://github.com/zzfqwq/coremail_sync</website>
+    <bugs>https://github.com/zzfqwq/coremail_sync/issues</bugs>
+    <repository type="git">https://github.com/zzfqwq/coremail_sync.git</repository>
+    <documentation>
+        <user>https://github.com/zzfqwq/coremail_sync#readme</user>
+        <admin>https://github.com/zzfqwq/coremail_sync#readme</admin>
+        <developer>https://github.com/zzfqwq/coremail_sync#readme</developer>
+    </documentation>
     <namespace>CoremailSync</namespace>
     <category>integration</category>
     <category>office</category>
