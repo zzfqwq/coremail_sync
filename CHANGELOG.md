@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-beta.1
+## 0.1.0 - 2026-07-01
 
 - Add Coremail to Nextcloud one-way contacts and calendar synchronization.
 - Add administrator-managed Production/Public and Demo/VM security modes.
