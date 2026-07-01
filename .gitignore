@@ -1,0 +1,27 @@
+# Local OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Build and release artifacts
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+build/
+dist/
+release/
+
+# Nextcloud signing artifacts
+*.key
+*.csr
+*.crt
+*.signature
+
+# Local test and deployment files
+.tmp*/
+tmp/
+*.log
+*.bak*
+*.stage.*

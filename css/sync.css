@@ -1,0 +1,343 @@
+.cmsync-app {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    width: 100vw;
+    max-width: 100vw;
+    height: calc(100vh - 50px);
+    min-height: 640px;
+    overflow: hidden;
+    background: #f7fbff;
+    color: #17212f;
+}
+
+.cmsync-side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 26px 22px;
+    background:
+        radial-gradient(circle at 25% 88%, rgba(255, 255, 255, .72), transparent 18%),
+        linear-gradient(145deg, #e7f7ff 0%, #ccefff 100%);
+    border-right: 1px solid #c7dceb;
+    overflow-y: auto;
+}
+
+.cmsync-logo {
+    margin-bottom: 8px;
+    color: #0072ce;
+    font-size: 28px;
+    font-weight: 750;
+    line-height: 1.1;
+}
+
+.cmsync-primary,
+.cmsync-nav-item,
+.cmsync-link,
+.cmsync-actions button,
+.cmsync-icon {
+    min-height: 44px;
+    border: 1px solid #b9d1e5;
+    border-radius: 8px;
+    background: #fff;
+    color: #004f82;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.cmsync-primary,
+.cmsync-nav-item.active,
+.cmsync-actions .primary,
+.cmsync-icon {
+    border-color: #0072ce;
+    background: #0072ce;
+    color: #fff;
+}
+
+.cmsync-nav {
+    display: grid;
+    gap: 8px;
+}
+
+.cmsync-nav-item,
+.cmsync-link,
+.cmsync-primary {
+    width: 100%;
+    padding: 0 16px;
+    text-align: left;
+}
+
+.cmsync-primary {
+    text-align: center;
+}
+
+.cmsync-account {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.cmsync-account-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cmsync-more,
+.cmsync-close {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(236, 244, 249, .92);
+    color: #17212f;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.cmsync-side-footer {
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.cmsync-main {
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    background: #fff;
+}
+
+.cmsync-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 68px;
+    padding: 0 28px;
+    border-bottom: 1px solid #dce7f0;
+}
+
+.cmsync-toolbar h1 {
+    margin: 0;
+    color: #17212f;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.cmsync-icon {
+    padding: 0 18px;
+}
+
+.cmsync-status {
+    min-height: 46px;
+    padding: 12px 28px;
+    border-bottom: 1px solid #dce7f0;
+    color: #5a6a72;
+    white-space: pre-wrap;
+}
+
+.cmsync-status[data-tone="success"] {
+    color: #087d3f;
+}
+
+.cmsync-status[data-tone="error"] {
+    color: #b42318;
+}
+
+.cmsync-status[data-tone="warn"] {
+    color: #8a5a00;
+}
+
+.cmsync-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    padding: 24px 28px;
+}
+
+.cmsync-panel {
+    min-height: 150px;
+    padding: 18px;
+    border: 1px solid #dce7f0;
+    border-radius: 8px;
+    background: #f8fbff;
+}
+
+.cmsync-panel h2 {
+    margin: 0 0 14px;
+    color: #5b6d78;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.cmsync-panel strong {
+    display: block;
+    margin-bottom: 10px;
+    color: #17212f;
+    font-size: 20px;
+    line-height: 1.25;
+}
+
+.cmsync-panel p {
+    margin: 0;
+    color: #5f707a;
+    line-height: 1.55;
+}
+
+.cmsync-results {
+    display: grid;
+    gap: 12px;
+    padding: 0 28px 36px;
+}
+
+.cmsync-result {
+    padding: 16px 18px;
+    border: 1px solid #dce7f0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.cmsync-result strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #17212f;
+}
+
+.cmsync-result p {
+    margin: 0;
+    color: #5f707a;
+    white-space: pre-wrap;
+}
+
+.cmsync-result pre {
+    max-height: 220px;
+    margin: 12px 0 0;
+    padding: 12px;
+    overflow: auto;
+    border-radius: 8px;
+    background: #eef5fb;
+    color: #243843;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.cmsync-drawer {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 2000;
+    width: min(540px, 92vw);
+    padding: 30px;
+    overflow-y: auto;
+    background: #fff;
+    box-shadow: -12px 0 32px rgba(23, 33, 47, .18);
+}
+
+.cmsync-form {
+    display: grid;
+    gap: 20px;
+}
+
+.cmsync-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.cmsync-drawer-head h2 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.cmsync-form label {
+    display: grid;
+    gap: 8px;
+    color: #243843;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.cmsync-form input,
+.cmsync-form select {
+    width: 100%;
+    min-height: 46px;
+    padding: 0 14px;
+    border: 1px solid #bdd1e1;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 15px;
+}
+
+.cmsync-admin-settings {
+    display: grid;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid #dce7f0;
+    border-radius: 8px;
+    background: #f8fbff;
+}
+
+.cmsync-admin-settings[hidden] {
+    display: none;
+}
+
+.cmsync-admin-settings h3 {
+    margin: 0;
+    color: #17212f;
+    font-size: 17px;
+}
+
+.cmsync-checks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.cmsync-checks label {
+    grid-template-columns: 20px 1fr;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 14px;
+    border: 1px solid #bdd1e1;
+    border-radius: 8px;
+}
+
+.cmsync-checks input {
+    min-height: 0;
+    padding: 0;
+}
+
+.cmsync-help {
+    margin: 0;
+    color: #52646b;
+    line-height: 1.6;
+}
+
+.cmsync-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.cmsync-actions button {
+    padding: 0 18px;
+}
+
+@media (max-width: 900px) {
+    .cmsync-app {
+        grid-template-columns: 1fr;
+    }
+
+    .cmsync-side {
+        display: none;
+    }
+
+    .cmsync-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>coremail_sync</id>
+    <name>Coremail Sync</name>
+    <summary>Coremail to Nextcloud native DAV sync bridge</summary>
+    <description>Synchronizes Coremail contacts and calendars into native Nextcloud Contacts and Calendar.</description>
+    <version>0.1.0</version>
+    <licence>AGPL-3.0-or-later</licence>
+    <author>Coremail</author>
+    <namespace>CoremailSync</namespace>
+    <category>integration</category>
+    <category>office</category>
+    <navigations>
+        <navigation>
+            <name>Coremail Sync</name>
+            <route>coremail_sync.page.index</route>
+            <icon>app.svg</icon>
+            <order>39</order>
+        </navigation>
+    </navigations>
+    <dependencies>
+        <nextcloud min-version="31" max-version="33"/>
+    </dependencies>
+</info>
