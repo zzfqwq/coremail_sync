@@ -29,7 +29,7 @@ style('coremail_sync', 'sync');
 
     <main class="cmsync-main">
         <header class="cmsync-toolbar">
-            <h1>Coremail Sync</h1>
+            <h1><?php p($l->t('Coremail Sync')); ?></h1>
             <button class="cmsync-icon" type="button" data-action="sync"><?php p($l->t('Sync now')); ?></button>
         </header>
 
@@ -38,7 +38,7 @@ style('coremail_sync', 'sync');
         <section class="cmsync-grid" aria-label="<?php p($l->t('Sync summary')); ?>">
             <article class="cmsync-panel">
                 <h2><?php p($l->t('Direction')); ?></h2>
-                <strong>Coremail -&gt; Nextcloud</strong>
+                <strong><?php p($l->t('Coremail to Nextcloud')); ?></strong>
                 <p><?php p($l->t('Contacts and calendars are written into native Nextcloud address books and calendars.')); ?></p>
             </article>
             <article class="cmsync-panel">
@@ -85,7 +85,7 @@ style('coremail_sync', 'sync');
                     <span><?php p($l->t('Security mode')); ?></span>
                     <select name="securityMode">
                         <option value="production"><?php p($l->t('Production / public')); ?></option>
-                        <option value="demo">Demo / VM</option>
+                        <option value="demo"><?php p($l->t('Demo / VM')); ?></option>
                     </select>
                 </label>
                 <label>

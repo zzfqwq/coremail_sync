@@ -125,8 +125,26 @@ class SettingsController extends Controller {
             'configured' => $password !== '',
             'passwordStored' => $password !== '',
             'lastRun' => $lastRun !== '' ? date('Y-m-d H:i:s', (int)$lastRun) : '',
-            'lastSummary' => $summary,
+            'lastSummary' => $this->localizedStoredSummary($summary),
         ];
+    }
+
+    private function localizedStoredSummary(string $summary): string {
+        if ($summary === '') {
+            return '';
+        }
+
+        if (preg_match('/^Contacts: ([0-9]+) contact\(s\) synchronized\., Calendars: ([0-9]+) calendar item\(s\) synchronized\.$/', $summary, $matches) === 1) {
+            return $this->l10n->t(
+                'Contacts: %s, Calendars: %s',
+                [
+                    $this->l10n->t('%s contact(s) synchronized.', [$matches[1]]),
+                    $this->l10n->t('%s calendar item(s) synchronized.', [$matches[2]]),
+                ]
+            );
+        }
+
+        return $this->l10n->t($summary);
     }
 
     private function adminSettingsForResponse(): array {

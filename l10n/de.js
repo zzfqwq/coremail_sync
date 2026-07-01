@@ -9,6 +9,7 @@ OC.L10N.register(
     "Settings": "Einstellungen",
     "Sync summary": "Synchronisierungsuebersicht",
     "Direction": "Richtung",
+    "Coremail to Nextcloud": "Coremail zu Nextcloud",
     "Contacts and calendars are written into native Nextcloud address books and calendars.": "Kontakte und Kalender werden in native Nextcloud-Adressbuecher und -Kalender geschrieben.",
     "Schedule": "Zeitplan",
     "Every %s minutes": "Alle %s Minuten",

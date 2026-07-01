@@ -9,6 +9,7 @@ OC.L10N.register(
     "Settings": "设置",
     "Sync summary": "同步概览",
     "Direction": "方向",
+    "Coremail to Nextcloud": "Coremail 到 Nextcloud",
     "Contacts and calendars are written into native Nextcloud address books and calendars.": "联系人和日历会写入 Nextcloud 原生地址簿和日历。",
     "Schedule": "计划",
     "Every %s minutes": "每 %s 分钟",
