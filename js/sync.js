@@ -9,6 +9,12 @@
     const endpoint = (path) => OC.generateUrl('/apps/coremail_sync' + path);
     const q = (selector) => root.querySelector(selector);
     const qa = (selector) => Array.from(root.querySelectorAll(selector));
+    const __ = (text, vars) => {
+        if (typeof t === 'function') {
+            return t('coremail_sync', text, vars || {});
+        }
+        return replacePlaceholders(text, vars || {});
+    };
 
     const state = {
         settings: null,
@@ -50,32 +56,32 @@
 
         const accountName = q('[data-field="accountName"]');
         if (accountName) {
-            accountName.textContent = settings.email || 'Not configured';
+            accountName.textContent = settings.email || __('Not configured');
         }
 
         const intervalLabel = q('[data-field="intervalLabel"]');
         if (intervalLabel) {
-            intervalLabel.textContent = `Every ${settings.intervalMinutes || 30} minutes`;
+            intervalLabel.textContent = __('Every {minutes} minutes', { minutes: settings.intervalMinutes || 30 });
         }
 
         const lastRun = q('[data-field="lastRun"]');
         if (lastRun) {
-            lastRun.textContent = settings.lastRun || 'Never';
+            lastRun.textContent = settings.lastRun || __('Never');
         }
 
         const lastSummary = q('[data-field="lastSummary"]');
         if (lastSummary) {
-            lastSummary.textContent = settings.lastSummary || 'No sync has run yet.';
+            lastSummary.textContent = settings.lastSummary || __('No sync has run yet.');
         }
 
         const modeLabel = q('[data-field="modeLabel"]');
         if (modeLabel) {
-            modeLabel.textContent = settings.mode === 'demo' ? 'Demo / VM' : 'Production';
+            modeLabel.textContent = settings.mode === 'demo' ? __('Demo / VM') : __('Production');
         }
 
         const davBaseUrlLabel = q('[data-field="davBaseUrlLabel"]');
         if (davBaseUrlLabel) {
-            davBaseUrlLabel.textContent = settings.effectiveDavBaseUrl || 'Coremail DAV URL is not configured.';
+            davBaseUrlLabel.textContent = settings.effectiveDavBaseUrl || __('Coremail DAV URL is not configured.');
         }
     }
 
@@ -126,34 +132,34 @@
     async function loadSettings() {
         const { response, payload } = await requestJson(endpoint('/api/settings'));
         if (!response.ok || !payload.ok) {
-            setStatus(payload.message || 'Unable to load sync settings.', 'error');
+            setStatus(payload.message || __('Unable to load sync settings.'), 'error');
             openSettings();
             return;
         }
 
         fillSettings(payload.settings || {});
         fillAdminSettings(payload);
-        setStatus(payload.settings?.configured ? 'Ready to sync Coremail into Nextcloud.' : 'Please configure the Coremail account before syncing.', payload.settings?.configured ? 'success' : 'warn');
+        setStatus(payload.settings?.configured ? __('Ready to sync Coremail into Nextcloud.') : __('Please configure the Coremail account before syncing.'), payload.settings?.configured ? 'success' : 'warn');
         if (!payload.settings?.configured) {
             openSettings();
         }
     }
 
     async function saveSettings(form) {
-        setStatus('Saving settings...', 'info');
+        setStatus(__('Saving settings...'), 'info');
         const { response, payload } = await requestJson(endpoint('/api/settings'), {
             method: 'PUT',
             body: JSON.stringify(settingsPayload(form)),
         });
         if (!response.ok || !payload.ok) {
-            setStatus(payload.message || 'Saving settings failed.', 'error');
+            setStatus(payload.message || __('Saving settings failed.'), 'error');
             return;
         }
 
         fillSettings(payload.settings || {});
         fillAdminSettings(payload);
         closeSettings();
-        setStatus('Settings saved.', 'success');
+        setStatus(__('Settings saved.'), 'success');
     }
 
     function renderResults(result) {
@@ -162,19 +168,19 @@
             return;
         }
         const sections = [
-            ['Contacts', result.contacts],
-            ['Calendars', result.calendars],
+            [__('Contacts'), result.contacts],
+            [__('Calendars'), result.calendars],
         ];
         box.innerHTML = sections.map(([label, item]) => {
             const ok = item?.ok === true;
             const count = item?.count ?? 0;
-            const message = item?.message || (ok ? `${count} item(s) synchronized.` : 'Not run.');
+            const message = item?.message || (ok ? __('{count} item(s) synchronized.', { count }) : __('Not run.'));
             const attempts = Array.isArray(item?.attempts) && item.attempts.length > 0
                 ? `<pre>${escapeHtml(item.attempts.map((attempt) => `${attempt.status || 0} ${attempt.depth || '-'} ${attempt.url || ''}`).join('\n'))}</pre>`
                 : '';
             return `
                 <article class="cmsync-result">
-                    <strong>${escapeHtml(label)}: ${ok ? 'OK' : 'Skipped or failed'}</strong>
+                    <strong>${escapeHtml(label)}: ${ok ? __('OK') : __('Skipped or failed')}</strong>
                     <p>${escapeHtml(message)}</p>
                     ${attempts}
                 </article>
@@ -183,13 +189,13 @@
     }
 
     async function syncNow() {
-        setStatus('Synchronizing Coremail contacts and calendars...', 'info');
+        setStatus(__('Synchronizing Coremail contacts and calendars...'), 'info');
         const { response, payload } = await requestJson(endpoint('/api/sync'), {
             method: 'POST',
             body: JSON.stringify({}),
         });
         if (!response.ok || !payload.ok) {
-            setStatus(payload.message || 'Sync failed.', 'error');
+            setStatus(payload.message || __('Sync failed.'), 'error');
             if (payload.result) {
                 renderResults(payload.result);
             }
@@ -199,7 +205,7 @@
         renderResults(payload.result || {});
         fillSettings(payload.settings || state.settings || {});
         fillAdminSettings(payload);
-        setStatus(payload.message || 'Sync completed.', 'success');
+        setStatus(payload.message || __('Sync completed.'), 'success');
     }
 
     function escapeHtml(value) {
@@ -209,6 +215,12 @@
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
+    }
+
+    function replacePlaceholders(text, vars) {
+        return String(text).replace(/\{([^}]+)\}/g, (match, key) => {
+            return Object.prototype.hasOwnProperty.call(vars, key) ? String(vars[key]) : match;
+        });
     }
 
     function bindActions() {

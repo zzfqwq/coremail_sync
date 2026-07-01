@@ -8,6 +8,7 @@ use OCA\CoremailSync\AppInfo\Application;
 use OCA\DAV\CalDAV\CalDavBackend;
 use OCA\DAV\CardDAV\CardDavBackend;
 use OCP\IConfig;
+use OCP\IL10N;
 
 class SyncService {
     private const MODE_PRODUCTION = 'production';
@@ -17,6 +18,7 @@ class SyncService {
         private IConfig $config,
         private CardDavBackend $cardDavBackend,
         private CalDavBackend $calDavBackend,
+        private IL10N $l10n,
     ) {
     }
 
@@ -40,30 +42,32 @@ class SyncService {
         $settings = $this->readSettings($userId);
         if ($settings['email'] === '' || $settings['password'] === '') {
             return [
-                'contacts' => ['ok' => false, 'count' => 0, 'message' => 'Coremail account or password is missing.'],
-                'calendars' => ['ok' => false, 'count' => 0, 'message' => 'Coremail account or password is missing.'],
+                'contacts' => ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Coremail account or password is missing.')],
+                'calendars' => ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Coremail account or password is missing.')],
             ];
         }
         if ($settings['baseUrl'] === '') {
             return [
-                'contacts' => ['ok' => false, 'count' => 0, 'message' => 'Coremail DAV URL is missing.'],
-                'calendars' => ['ok' => false, 'count' => 0, 'message' => 'Coremail DAV URL is missing.'],
+                'contacts' => ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Coremail DAV URL is missing.')],
+                'calendars' => ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Coremail DAV URL is missing.')],
             ];
         }
 
         $result = [
             'contacts' => $settings['syncContacts']
                 ? $this->syncContacts($userId, $settings)
-                : ['ok' => true, 'count' => 0, 'message' => 'Contacts sync is disabled.'],
+                : ['ok' => true, 'count' => 0, 'message' => $this->l10n->t('Contacts sync is disabled.')],
             'calendars' => $settings['syncCalendars']
                 ? $this->syncCalendars($userId, $settings)
-                : ['ok' => true, 'count' => 0, 'message' => 'Calendars sync is disabled.'],
+                : ['ok' => true, 'count' => 0, 'message' => $this->l10n->t('Calendars sync is disabled.')],
         ];
 
-        $summary = sprintf(
+        $summary = $this->l10n->t(
             'Contacts: %s, Calendars: %s',
-            $result['contacts']['message'] ?? 'not run',
-            $result['calendars']['message'] ?? 'not run'
+            [
+                $result['contacts']['message'] ?? $this->l10n->t('not run'),
+                $result['calendars']['message'] ?? $this->l10n->t('not run'),
+            ]
         );
         $this->config->setUserValue($userId, Application::APP_ID, 'last_run', (string)time());
         $this->config->setUserValue($userId, Application::APP_ID, 'last_summary', $summary);
@@ -108,7 +112,7 @@ class SyncService {
                 $result = [
                     'ok' => false,
                     'count' => 0,
-                    'message' => 'No Coremail CardDAV address book was discovered.',
+                    'message' => $this->l10n->t('No Coremail CardDAV address book was discovered.'),
                 ];
                 if ($settings['debugAttempts']) {
                     $result['attempts'] = $discovery['attempts'];
@@ -137,9 +141,9 @@ class SyncService {
                 }
             }
 
-            return ['ok' => true, 'count' => $count, 'message' => $count . ' contact(s) synchronized.'];
+            return ['ok' => true, 'count' => $count, 'message' => $this->l10n->t('%s contact(s) synchronized.', [$count])];
         } catch (\Throwable $error) {
-            return ['ok' => false, 'count' => 0, 'message' => 'Contacts sync failed: ' . $error->getMessage()];
+            return ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Contacts sync failed: %s', [$error->getMessage()])];
         }
     }
 
@@ -150,7 +154,7 @@ class SyncService {
                 $result = [
                     'ok' => false,
                     'count' => 0,
-                    'message' => 'No Coremail CalDAV calendar was discovered.',
+                    'message' => $this->l10n->t('No Coremail CalDAV calendar was discovered.'),
                 ];
                 if ($settings['debugAttempts']) {
                     $result['attempts'] = $discovery['attempts'];
@@ -179,9 +183,9 @@ class SyncService {
                 }
             }
 
-            return ['ok' => true, 'count' => $count, 'message' => $count . ' calendar item(s) synchronized.'];
+            return ['ok' => true, 'count' => $count, 'message' => $this->l10n->t('%s calendar item(s) synchronized.', [$count])];
         } catch (\Throwable $error) {
-            return ['ok' => false, 'count' => 0, 'message' => 'Calendars sync failed: ' . $error->getMessage()];
+            return ['ok' => false, 'count' => 0, 'message' => $this->l10n->t('Calendars sync failed: %s', [$error->getMessage()])];
         }
     }
 
@@ -459,13 +463,13 @@ XML;
         $host = strtolower(trim((string)($parts['host'] ?? ''), '[]'));
 
         if (!in_array($scheme, ['http', 'https'], true) || $host === '') {
-            throw new \RuntimeException('Invalid Coremail DAV URL.');
+            throw new \RuntimeException($this->l10n->t('Invalid Coremail DAV URL.'));
         }
         if ($scheme === 'http' && !$settings['allowHttp']) {
-            throw new \RuntimeException('Production mode requires an HTTPS Coremail DAV URL.');
+            throw new \RuntimeException($this->l10n->t('Production mode requires an HTTPS Coremail DAV URL.'));
         }
         if (!$settings['allowPrivateNetwork'] && $this->isPrivateHost($host)) {
-            throw new \RuntimeException('Production mode does not allow private or localhost Coremail DAV hosts.');
+            throw new \RuntimeException($this->l10n->t('Production mode does not allow private or localhost Coremail DAV hosts.'));
         }
     }
 

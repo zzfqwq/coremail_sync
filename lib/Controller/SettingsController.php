@@ -10,6 +10,7 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IGroupManager;
 use OCP\IConfig;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IUserSession;
 
@@ -22,6 +23,7 @@ class SettingsController extends Controller {
         private IConfig $config,
         private IUserSession $userSession,
         private IGroupManager $groupManager,
+        private IL10N $l10n,
         private SyncService $syncService,
     ) {
         parent::__construct(Application::APP_ID, $incomingRequest);
@@ -47,7 +49,7 @@ class SettingsController extends Controller {
     public function save(): DataResponse {
         $userId = $this->getUserId();
         if ($userId === '') {
-            return new DataResponse(['ok' => false, 'message' => 'Current Nextcloud user is not logged in.'], 401);
+            return new DataResponse(['ok' => false, 'message' => $this->l10n->t('Current Nextcloud user is not logged in.')], 401);
         }
         if ($this->isAdmin($userId)) {
             $this->saveAdminSettings();
@@ -59,10 +61,10 @@ class SettingsController extends Controller {
         $intervalMinutes = max(1, min(1440, (int)$this->incomingRequest->getParam('intervalMinutes', 30)));
 
         if ($email === '') {
-            return new DataResponse(['ok' => false, 'message' => 'Coremail account is required.'], 400);
+            return new DataResponse(['ok' => false, 'message' => $this->l10n->t('Coremail account is required.')], 400);
         }
         if ($davBaseUrl === '' && $this->adminDavBaseUrl() === '') {
-            return new DataResponse(['ok' => false, 'message' => 'Coremail DAV URL is required.'], 400);
+            return new DataResponse(['ok' => false, 'message' => $this->l10n->t('Coremail DAV URL is required.')], 400);
         }
 
         $this->config->setUserValue($userId, Application::APP_ID, 'email', $email);
@@ -89,7 +91,7 @@ class SettingsController extends Controller {
     public function syncNow(): DataResponse {
         $userId = $this->getUserId();
         if ($userId === '') {
-            return new DataResponse(['ok' => false, 'message' => 'Current Nextcloud user is not logged in.'], 401);
+            return new DataResponse(['ok' => false, 'message' => $this->l10n->t('Current Nextcloud user is not logged in.')], 401);
         }
 
         $result = $this->syncService->syncUser($userId);
@@ -97,7 +99,7 @@ class SettingsController extends Controller {
 
         return new DataResponse([
             'ok' => $ok,
-            'message' => $ok ? 'Coremail sync completed.' : 'Coremail sync finished with errors.',
+            'message' => $ok ? $this->l10n->t('Coremail sync completed.') : $this->l10n->t('Coremail sync finished with errors.'),
             'result' => $result,
             'settings' => $this->settingsForResponse($userId),
             'adminSettings' => $this->adminSettingsForResponse(),

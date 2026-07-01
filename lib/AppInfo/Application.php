@@ -32,13 +32,14 @@ class Application extends App implements IBootstrap {
         $navigationManager = $server->get(INavigationManager::class);
         $navigationManager->add(function () use ($server): array {
             $urlGenerator = $server->getURLGenerator();
+            $l10n = $server->getL10N(self::APP_ID);
 
             return [
                 'id' => self::APP_ID,
                 'order' => 39,
                 'href' => $urlGenerator->linkToRoute(self::APP_ID . '.page.index'),
                 'icon' => $urlGenerator->imagePath(self::APP_ID, 'app.svg'),
-                'name' => 'Coremail Sync',
+                'name' => $l10n->t('Coremail Sync'),
             ];
         });
     }
