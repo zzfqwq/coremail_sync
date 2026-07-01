@@ -7,7 +7,7 @@
 - Add Coremail to Nextcloud one-way contacts and calendar synchronization.
 - Add administrator-managed Production/Public and Demo/VM security modes.
 - Support an administrator default Coremail DAV base URL with optional per-user override.
-- Add localized UI strings for Simplified Chinese, German, and French.
+- Add localized UI strings for Simplified Chinese, German, French, Spanish, Italian, and Dutch.
 
 ### Security
 
