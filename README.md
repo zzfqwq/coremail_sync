@@ -1,3 +1,5 @@
+![Coremail login](screenshots/coremail-sync-login.png)
+
 # Coremail Sync
 
 💌 A Coremail synchronization bridge for Nextcloud
@@ -33,8 +35,6 @@ Future iterations may extend the bridge with two-way synchronization, conflict h
 About Coremail
 
 Coremail is an enterprise-grade email system designed for large-scale organizational communication. It supports high-concurrency mail services, centralized administration, secure mail delivery, and flexible deployment models. With stable mail, contact, calendar and other capabilities, Coremail helps organizations manage daily communication efficiently while ensuring reliability, security, and ease of administration.
-
-![Coremail login](screenshots/coremail-sync-login.png)
 
 ![Coremail home](screenshots/coremail-sync-home.png)
 
