@@ -5,7 +5,7 @@
 ### Changed
 
 - Improve App Store summary and long description.
-- Add App Store screenshot metadata and presentation image.
+- Add App Store screenshot metadata and Coremail screenshots.
 
 ## 0.1.0 - 2026-07-01
 
