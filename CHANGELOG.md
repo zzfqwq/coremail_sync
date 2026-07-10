@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3 - 2026-07-10
+
+### Changed
+
+- Repackage the latest Coremail Sync Bridge README and App Store description.
+
 ## 0.1.2 - 2026-07-10
 
 ### Changed
