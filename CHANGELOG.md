@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-07-10
+
+### Changed
+
+- Update App Store description from the Coremail Sync Bridge - Nextcloud document.
+- Expand the description to include Coremail email, calendar, and contact synchronization scope.
+
 ## 0.1.1 - 2026-07-03
 
 ### Changed
