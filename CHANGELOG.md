@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 - 2026-07-10
+
+### Changed
+
+- Rename the app display name to Coremail Sync Bridge - Nextcloud.
+
 ## 0.1.3 - 2026-07-10
 
 ### Changed
