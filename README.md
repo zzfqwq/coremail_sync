@@ -1,10 +1,8 @@
 ![Coremail login](screenshots/coremail-sync-login.png)
 
-# Coremail Sync Bridge - Nextcloud
-
 💌 Bring Coremail into Nextcloud
 
-Coremail Sync bridge helps organizations using both Coremail and Nextcloud access Coremail contact, calendar and email data directly inside native Nextcloud apps. It is designed for teams that use Coremail as their enterprise email system and Nextcloud as their collaboration workspace, helping users work with mail, schedules, and address books in one environment.
+Coremail Sync bridge helps organizations using both Coremail and Nextcloud access Coremail contact, calendar and email data directly inside native Nextcloud apps. It is designed for teams that use Coremail as their enterprise email system and Nextcloud as their collaboration workspace, helping users work with mail, schedules, and address books in one environment. 
 
 Key features
 
@@ -22,7 +20,7 @@ Key features
 
 • Allow users to connect their own Coremail account for synchronization
 
-The current version focuses on reliable synchronization from Coremail to Nextcloud. Changes made in Coremail can be synchronized into Nextcloud.
+The current version focuses on reliable synchronization from Coremail to Nextcloud. Changes made in Coremail can be synchronized into Nextcloud. 
 
 Who is this for?
 
