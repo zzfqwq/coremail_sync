@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.5 - 2026-07-12
+
+### Changed
+
+- Refresh the App Store README and long description with the updated Coremail overview.
+
 ## 0.1.4 - 2026-07-10
 
 ### Changed
