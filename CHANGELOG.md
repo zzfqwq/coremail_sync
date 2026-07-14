@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.6 - 2026-07-14
+
+### Changed
+
+- Update App Store description to focus on Coremail contacts and calendars.
+- Add the new dashboard screenshot to App Store metadata.
+- Support Nextcloud 34 and update the navigation name to Coremail Sync Bridge.
+- Simplify the main sync page by removing the mode card and secondary sidebar item.
+
 ## 0.1.5 - 2026-07-12
 
 ### Changed

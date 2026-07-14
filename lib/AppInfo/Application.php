@@ -11,6 +11,7 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\BackgroundJob\IJobList;
 use OCP\INavigationManager;
+use OCP\IURLGenerator;
 
 class Application extends App implements IBootstrap {
     public const APP_ID = 'coremail_sync';
@@ -31,15 +32,14 @@ class Application extends App implements IBootstrap {
 
         $navigationManager = $server->get(INavigationManager::class);
         $navigationManager->add(function () use ($server): array {
-            $urlGenerator = $server->getURLGenerator();
-            $l10n = $server->getL10N(self::APP_ID);
+            $urlGenerator = $server->get(IURLGenerator::class);
 
             return [
                 'id' => self::APP_ID,
                 'order' => 39,
                 'href' => $urlGenerator->linkToRoute(self::APP_ID . '.page.index'),
                 'icon' => $urlGenerator->imagePath(self::APP_ID, 'app.svg'),
-                'name' => $l10n->t('Coremail Sync'),
+                'name' => 'Coremail Sync Bridge',
             ];
         });
     }

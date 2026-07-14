@@ -15,9 +15,6 @@ style('coremail_sync', 'sync');
     <aside class="cmsync-side">
         <div class="cmsync-logo">Coremail</div>
         <button class="cmsync-primary" type="button" data-action="sync"><?php p($l->t('Sync now')); ?></button>
-        <nav class="cmsync-nav" aria-label="<?php p($l->t('Coremail sync')); ?>">
-            <button class="cmsync-nav-item active" type="button"><?php p($l->t('Sync bridge')); ?></button>
-        </nav>
         <div class="cmsync-account">
             <div class="cmsync-account-name" data-field="accountName"><?php p($l->t('Not configured')); ?></div>
             <button class="cmsync-more" type="button" data-action="settings" aria-label="<?php p($l->t('Settings')); ?>">...</button>
@@ -29,7 +26,7 @@ style('coremail_sync', 'sync');
 
     <main class="cmsync-main">
         <header class="cmsync-toolbar">
-            <h1><?php p($l->t('Coremail Sync')); ?></h1>
+            <h1>Coremail Sync Bridge</h1>
             <button class="cmsync-icon" type="button" data-action="sync"><?php p($l->t('Sync now')); ?></button>
         </header>
 
@@ -50,11 +47,6 @@ style('coremail_sync', 'sync');
                 <h2><?php p($l->t('Last run')); ?></h2>
                 <strong data-field="lastRun"><?php p($l->t('Never')); ?></strong>
                 <p data-field="lastSummary"><?php p($l->t('No sync has run yet.')); ?></p>
-            </article>
-            <article class="cmsync-panel">
-                <h2><?php p($l->t('Mode')); ?></h2>
-                <strong data-field="modeLabel"><?php p($l->t('Production')); ?></strong>
-                <p data-field="davBaseUrlLabel"><?php p($l->t('Coremail DAV URL is not configured.')); ?></p>
             </article>
         </section>
 
